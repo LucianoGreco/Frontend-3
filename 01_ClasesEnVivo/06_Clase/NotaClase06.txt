@@ -1,0 +1,200 @@
++-----------------------------------------------------+
+| # Extencion de google Chrome: React Developer Tools |
++-----------------------------------------------------+
+	-App
+		-Padre
+			-Hijo
+		-Hijo
+
+	// rafce
+
++------------+
+| # CHILDREN |
++------------+ 
+
+}}}App.jsx}}}
+	import Hijo from './Components/hijo'
+	import Padre from './Components/padre'
+
+	function App() {
+    	return (
+    		<>
+      			<Padre> // props.children – Elementos children
+        			<h1>Contenido Children del padre</h1>
+        			<ul>
+          				<li>Elemento1</li>
+          				<li>Elemento2</li>
+          				<li>Elemento3</li>
+        			</ul> 
+      			</Padre>
+      			<Hijo/>
+    		</>
+  		)
+	}
+	export default App
+
+
+}}}Hijo.jsx}}}
+	import React from ‘react’
+
+	const Hijo = () => {
+    	return (
+        	<div>
+            	<h2>Componente Hijo</h2>
+        	</div>
+    	)
+	}
+	export default Hijo
+
+
+}}}Hijo.jsx}}}
+	import Hijo from './hijo'
+
+	const Padre = (props) => {
+    	return (
+        	<div>
+            	<h1>Componente Padre</h1>
+            	<Hijo/>
+            	{props.children} {/*Renderiza los elementos Children*/}
+        	</div>
+    	)
+	}
+	export default Padre
+
+
+
++-----------------------------------------------+
+| # DIFERENTES FORMAS DE TRABAJAR ESTILOS - CSS |
++-----------------------------------------------+
+Cuando tenemos los estilos de muchos componentes, conviene dividirlos en archivos .css independientes
+
+	Todos los estilos en archivo principal
+		- App.css: 
+			+ Estilos Home
+			+ Estilos Navbar
+			+ Estilos Card
+
+	Estilos en archivos Independientes
+		- Home.css
+		- Navbar.css
+		- Card.css
+
++---------------+
+| #1 CSS INLINE |
++---------------+
+1.
+	return (
+    	<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'green', boxShadow: '3px 5px 8px #000', borderRadius: '10px'}}>
+			…
+    	</div>
+  	)
+
+2.
+  	return (
+  		<div style={navbarStyle} >
+			…
+    	</div>
+  	)
+
+    const navbarStyle = { //------------- b. Se coloca un estilo
+      	display: 'flex', 
+      	flexDirection: 'row', 
+      	justifyContent: 'space-around',
+      	backgroundColor: 'green',
+      	boxShadow: '3px 5px 8px #000',
+      	borderRadius: '10px'
+    }
+
+3.
+  	return (
+    	<div className='navbar'>
+		…
+    	</div>
+  	)
+
+    const navbar = {
+      	display: 'flex', 
+      	flexDirection: 'row', 
+      	justifyContent: 'space-around',
+      	backgroundColor: 'green',
+      	boxShadow: '3px 5px 8px #000',
+      	borderRadius: '10px'
+    }
+
+
++----------------+
+| #2 CSS MODULOS |
++----------------+
+
+	}}}Card.jsx}}}
+	import ESTILO from './Card.module.css' // Creo una variable para convocar un estilo dentro de un modulo
+
+	const Card = ({menu}) => {
+		return (
+    		<div className={ESTILO.card}>
+        		<img className={ESTILO.cardImg} src={menu.img} alt="" />
+    		</div>
+  		)
+	}
+
+	}}}Card.module.css}}}
+	.card{
+   		padding: 2em;
+    	width: 300px;
+    	border: 3px solid beige;
+    	border-radius: 10px;
+    	background-color: grey;
+    	margin-bottom: 10px;
+    	box-shadow: 3px 5px 8px #000;
+	}
+	.cardImg{
+    	width: 250px;
+    	height: 250px;
+    	border-radius: 10px;
+    	object-fit: cover;
+	}
+
+
++-----------------------------------------------+
+| #3 CSS STYLE COMPONEN - styled-components.com |
++-----------------------------------------------+
+
+1.	https://styled-components.com/docs/basics#installation
+
+2.	npm install styled-components
+
+3.	Verificar Instalacion: package.json
+  		"dependencies": {
+    		"react": "^18.2.0",
+    		"react-dom": "^18.2.0",
+    		"styled-components": "^6.0.0-rc.1"
+  		},
+
+4.	Sintaxis
+		import { styled } from 'styled-components' //1. Importar el componente styled de la libreria
+
+  		return (
+			// 3.
+    		<Container> //<-------------------- <div>
+        		<h1 >Lista de pizzas</h1>
+        		{pizzas.map(pizza => <Card key={pizza.id} menu={pizza}/>)}
+    		</Container> //<------------------ </div>
+  		)
+
+		const Container = styled.div` //2. La variable container encapsula el estilo definindo para div
+  			margin-top: 40px; //<----------------- css comun
+  			background-color: black;
+  			width: 80vw;
+  			display: flex;
+  			flex-direction: column;
+  			align-items: center;
+		`
+
+
+
+
+
+
+
+
+

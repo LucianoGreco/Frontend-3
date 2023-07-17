@@ -40,7 +40,7 @@ function App() {
     }
   }
 
-
+// 55:12
   
   return (
     <div  className="App">
@@ -55,4 +55,14 @@ function App() {
 
 export default App;
 
-// MINUTO: 34:44
+/* PROBLEMA CON GIT CLONE
+error: remote origin already exists.
+
+1. git remote -v
+. repositorioClonado(fetch) Ya existe un repositorio
+. repositorioClonado(push)
+
+2. git remote remove orgini
+2. git remote add origin https://git...
+3. gir push origin (main/master)
+*/
